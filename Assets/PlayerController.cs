@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody rigidBody;
 
+    public JumpSensor jumpSensor;
+    public float jumpSpeed;
+
     // Use this for initialization
     void Start()
     {
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour
         movDirection = movDirection.normalized;
 
         //決定要給Animator的動畫參數
-        if (movDirection.magnitude == 0)
+        if (movDirection.magnitude == 0 || !jumpSensor.IsCanJump() )
         {
             currentSpeed = 0;
         }
@@ -50,12 +53,19 @@ public class PlayerController : MonoBehaviour
         }
         animatorController.SetFloat("Speed", currentSpeed);
 
-        //轉換成世界座標的方向
+        //轉換成自己所面對的方向
         Vector3 worldSpaceDirection = movDirection.z * rotateYTransform.transform.forward +
                                       movDirection.x * rotateYTransform.transform.right;
         Vector3 velocity = rigidBody.velocity;
         velocity.x = worldSpaceDirection.x * moveSpeed;
         velocity.z = worldSpaceDirection.z * moveSpeed;
+        //rigidBody.velocity = velocity;                
+        //Vector3 velocity = worldSpaceDirection * moveSpeed;
+
+        if (Input.GetKey(KeyCode.Space) && jumpSensor.IsCanJump())
+        {
+            velocity.y = jumpSpeed;
+        }
         rigidBody.velocity = velocity;
 
         //計算滑鼠角度
