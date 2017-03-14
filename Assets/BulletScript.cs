@@ -7,6 +7,8 @@ public class BulletScript : MonoBehaviour
 
     public float FlyingSpeed;
     public float LifeTime;
+    public float damageValue = 15;
+
     public void InitAndShoot(Vector3 Direction)
     {
         Rigidbody rigidbody = this.GetComponent<Rigidbody>();
@@ -19,6 +21,7 @@ public class BulletScript : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
+        other.gameObject.SendMessage("Hit", damageValue);
         KillYourself();
     }
 }

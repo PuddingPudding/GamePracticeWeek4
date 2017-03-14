@@ -6,8 +6,8 @@ using UnityEngine;
 public class GunManager : MonoBehaviour
 {
 
-    public float MinimumShootPeriod;
-    public float muzzleShowPeriod;
+    public float MinimumShootPeriod; //最短涉及間隔
+    public float muzzleShowPeriod; //閃爍間隔
     private float shootCounter = 0;
     private float muzzleCounter = 0;
     public GameObject muzzleFlash;

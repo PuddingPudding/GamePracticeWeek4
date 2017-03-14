@@ -61,12 +61,13 @@ public class PlayerController : MonoBehaviour
         }
         animatorController.SetFloat("Speed", currentSpeed);
 
-        //轉換成自己所面對的方向
+        //以下將移動方向轉換成自己所面對的方向
         Vector3 worldSpaceDirection = movDirection.z * rotateYTransform.transform.forward +
                                       movDirection.x * rotateYTransform.transform.right;
         Vector3 velocity = rigidBody.velocity;
         velocity.x = worldSpaceDirection.x * moveSpeed;
         velocity.z = worldSpaceDirection.z * moveSpeed;
+        //以上兩行將x和z的速度個別獨立出來，是為了避免去動到跳躍的向量
         //rigidBody.velocity = velocity;                
         //Vector3 velocity = worldSpaceDirection * moveSpeed;
 
@@ -76,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
         rigidBody.velocity = velocity;
 
-        //計算滑鼠角度
+        //計算滑鼠角度，先將水平軸與垂直軸的數值吃進來(計算滑鼠移動的量)，再去乘以旋轉速度(可當成滑鼠靈敏度)
         rotateYTransform.transform.localEulerAngles += new Vector3(0, Input.GetAxis("Horizontal"), 0) * rotateSpeed;
         currentRotateX += Input.GetAxis("Vertical") * rotateSpeed;
         if (currentRotateX > 90)
