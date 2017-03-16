@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BreakableItem : MonoBehaviour
 {
-    [System.Serializable] //將BreakEntry序列化，如此
+    [System.Serializable] //將BreakEntry序列化，如此才能放入list中 (C#要求list只能裝序列化的資料)
     public class BreakingEntry
     {
         public GameObject breakNode;

@@ -13,13 +13,20 @@ public class GunManager : MonoBehaviour
     public GameObject muzzleFlash;
     public GameObject bulletCandidate;
 
+    private AudioSource gunShootSound;
+
     public void Start()
     {
+        gunShootSound = this.GetComponent<AudioSource>();
     }
     public void TryToTriggerGun()
     {
         if (shootCounter <= 0)
         {
+            gunShootSound.Stop();
+            gunShootSound.pitch = Random.Range(0.8f, 1);  //開槍前先隨機調整開槍聲的音高
+            gunShootSound.Play();
+
             this.transform.DOShakeRotation(MinimumShootPeriod * 0.8f, 3f);
             muzzleCounter = muzzleShowPeriod;
             //讓閃爍特效在每次出現時都隨機旋轉
