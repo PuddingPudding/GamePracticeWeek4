@@ -8,6 +8,7 @@ public class BulletScript : MonoBehaviour
     public float FlyingSpeed;
     public float LifeTime;
     public float damageValue = 15;
+    public GameObject explosion;
 
     public void InitAndShoot(Vector3 Direction)
     {
@@ -22,6 +23,9 @@ public class BulletScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         other.gameObject.SendMessage("Hit", damageValue);
+        //以下這一行，之所以不使用SetActive(false)的關係，是因為如果父物件Active為假，其子物件也會跟著消失
+        explosion.gameObject.transform.parent = null;
+        explosion.gameObject.SetActive(true);
         KillYourself();
     }
 }
