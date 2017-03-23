@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
 
     public GunManager gunManager;
+
+    public GameUIManager uiManager;
+    public int hp = 100;
 
     // Use this for initialization
     void Start()
@@ -89,5 +93,29 @@ public class PlayerController : MonoBehaviour
             currentRotateX = -90;
         }
         rotateXTransform.transform.localEulerAngles = new Vector3(-currentRotateX, 0, 0);
+    }
+
+    public void Hit(int value)
+    {
+        if (hp <= 0)
+        {
+            return;
+        }
+        hp -= value;
+        uiManager.SetHP(hp);
+        if (hp > 0)
+        {
+            uiManager.PlayHitAnimation();
+        }
+        else
+        {
+            uiManager.PlayerDiedAnimation();
+            rigidBody.gameObject.GetComponent<Collider>().enabled = false;
+            rigidBody.useGravity = false;
+            rigidBody.velocity = Vector3.zero;
+            this.enabled = false;
+            rotateXTransform.transform.DOLocalRotate(new Vector3(-60, 0, 0), 0.5f);
+            rotateYTransform.transform.DOLocalMoveY(-1.5f, 0.5f).SetRelative(true);
+        }
     }
 }

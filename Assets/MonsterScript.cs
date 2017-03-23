@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MonsterScript : MonoBehaviour
 {
-
     private Animator animator;
     private float MinimumHitPeriod = 1f;
     private float HitCounter = 0;
@@ -63,10 +62,19 @@ public class MonsterScript : MonoBehaviour
         }
     }
 
+    public void AttackPlayer()
+    {
+        if (AttackSensor.CollisionObjects.Count > 0)
+        {
+            AttackSensor.CollisionObjects[0].transform.GetChild(0).GetChild(0).SendMessage("Hit", 10);
+        }
+    }
+
     public void Hit(float value)
     {
         if (HitCounter <= 0)
         {
+            FollowTarget = GameObject.FindGameObjectWithTag("Player");
             HitCounter = MinimumHitPeriod;
             CurrentHP -= value;
             animator.SetFloat("HP", CurrentHP);
