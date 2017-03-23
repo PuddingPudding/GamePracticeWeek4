@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CollisionListScript : MonoBehaviour
 {
-
     public List<Collider> CollisionObjects; //碰撞器(Collider)為固有型態，我猜它已經有自己做過序列化(Serializable)了
     public void OnTriggerEnter(Collider other)
     {
