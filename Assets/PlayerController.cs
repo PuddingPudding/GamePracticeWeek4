@@ -113,9 +113,11 @@ public class PlayerController : MonoBehaviour
             rigidBody.gameObject.GetComponent<Collider>().enabled = false;
             rigidBody.useGravity = false;
             rigidBody.velocity = Vector3.zero;
-            this.enabled = false;
+            this.enabled = false; //讓該物件不再updated
             rotateXTransform.transform.DOLocalRotate(new Vector3(-60, 0, 0), 0.5f);
+            //在0.5秒內向後仰60度，製造倒下的效果
             rotateYTransform.transform.DOLocalMoveY(-1.5f, 0.5f).SetRelative(true);
+            //在0.5秒內將y軸向下降低1.5，後面補SetRelative代表著，我不是0.5秒內y座標移到-1.5，而是根據原本的y座標減少1.5
         }
     }
 }

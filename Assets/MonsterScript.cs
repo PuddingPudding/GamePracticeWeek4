@@ -25,7 +25,7 @@ public class MonsterScript : MonoBehaviour
 
     void Update()
     {
-        if(PlayerSensor.CollisionObjects.Count > 0)
+        if (PlayerSensor.CollisionObjects.Count > 0)
         {
             FollowTarget = PlayerSensor.CollisionObjects[0].gameObject;
         }
@@ -67,6 +67,9 @@ public class MonsterScript : MonoBehaviour
         if (AttackSensor.CollisionObjects.Count > 0)
         {
             AttackSensor.CollisionObjects[0].transform.GetChild(0).GetChild(0).SendMessage("Hit", 10);
+            //基本上AttackSensor盛裝的碰撞器中頂多只會有一個人，那就是玩家自己，然而，遊戲裡帶有碰撞器的是PlayerRoot
+            //PlayerRoot管理左右飄移之視線，其子物件PlayerEle...是用來管理上下飄移之視線，PlayerEle的子物件才是角色本體
+            //而程式碼是寫在那個物件上的
         }
     }
 
@@ -94,5 +97,5 @@ public class MonsterScript : MonoBehaviour
             });
         });
     }
-    
+
 }
