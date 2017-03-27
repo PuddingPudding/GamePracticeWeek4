@@ -74,9 +74,10 @@ public class MonsterScript : MonoBehaviour
     }
 
     public void Hit(float value)
-    {
+    {      
+
         if (HitCounter <= 0)
-        {
+        {            
             FollowTarget = GameObject.FindGameObjectWithTag("Player");
             HitCounter = MinimumHitPeriod;
             CurrentHP -= value;
