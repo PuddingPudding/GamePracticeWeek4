@@ -83,6 +83,11 @@ public class MonsterScript : MonoBehaviour
             animator.SetFloat("HP", CurrentHP);
             animator.SetTrigger("Hit");
             if (CurrentHP <= 0) { BuryTheBody(); }
+            //Component[] rendererList = this.transform.GetComponentsInChildren<Renderer>();
+            //foreach(Renderer renderer in rendererList)
+            //{
+            //    renderer.enabled = false;
+            //} //這一段程式碼會讓怪物隱形，作法是把它身上的渲染器全部關掉
         }
     }
     void BuryTheBody()
