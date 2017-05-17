@@ -84,22 +84,24 @@ public class MonsterScript : MonoBehaviour
             animator.SetFloat("HP", CurrentHP);
             animator.SetTrigger("Hit");
             if (CurrentHP <= 0) { BuryTheBody(); }
-            Component[] rendererList = this.transform.GetComponentsInChildren<Renderer>();
+            Component[] rendererList = this.transform.GetComponentsInChildren<Renderer>();            
             foreach (Renderer renderer in rendererList)
             {
-                foreach(Material material in renderer.materials)
+                foreach (Material material in renderer.materials)
                 {
-                    material.color = new Color(1,1,1,0.3f);
+                    material.color = new Color(1, 1, 1, 0.3f);
                 }
             } //這一段程式碼會讓怪物變成半透明的
 
-            //Component[] rendererList = this.transform.GetComponentsInChildren<Renderer>();
-            //foreach(Renderer renderer in rendererList)
+            //foreach (Renderer renderer in rendererList)
+            //{
+            //    renderer.material.color = new Color(1, 1, 1, 0.3f);
+            //}
+
+            //foreach (Renderer renderer in rendererList)
             //{
             //    renderer.enabled = false;
-             //} //這一段程式碼會讓怪物隱形，作法是把它身上的渲染器全部關掉
-             
-
+            //} //這一段程式碼會讓怪物隱形，作法是把它身上的渲染器全部關掉
         }
     }
     void BuryTheBody()
